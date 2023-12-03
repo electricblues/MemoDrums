@@ -17,8 +17,7 @@ body {
   width: 100%;
   padding-top: 10rem;
   margin-bottom: 4rem;
-  font-size: 30px;
-  /* font-family: "Merriweather", serif; */
+  font-size: 40px;
 }
 
 .play-button {
@@ -27,6 +26,11 @@ body {
   background-color: rgb(83, 229, 180);
   font-size: 30px;
   border-radius: 15px;
+}
+
+#gameText {
+  height: 3rem;
+  font-size: 35px;
 }
 
 .key {

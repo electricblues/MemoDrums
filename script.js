@@ -1,5 +1,8 @@
 const LIST_OF_KEYS = ["a", "s", "d", "f", "g"];
 
+const playButton = document.querySelector("#play");
+const gameText = document.getElementById("gameText");
+
 //generates a random list of keys of a particular length
 function newRandomKeys(length) {
   const newArray = [];
@@ -23,6 +26,7 @@ function playSoundByKey(key) {
     audio.play();
     tile.classList.add("active");
     tile.style.transition = "";
+
     setTimeout(() => {
       tile.classList.remove("active");
       tile.style.transition = "all 0.5s";
@@ -70,21 +74,37 @@ function playerTurn(keysToPlay) {
   });
 }
 
+function waitSomeTime() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 2000);
+  });
+}
+
+//Main game function
 async function play() {
   // generate a list of keys
   let freshList = newRandomKeys(3);
   let shouldPlay = true;
   // we make the computer play it
   while (shouldPlay) {
+    gameText.innerText = "Repeat the key pattern";
     await computerTurn(freshList);
     shouldPlay = await playerTurn(freshList);
+    if (shouldPlay) {
+      gameText.innerText = "Well Done!!!";
+    } else {
+      gameText.innerText = "Game over :( \n Press play to start over";
+    }
+
+    await waitSomeTime();
     freshList = newRandomKeys(3);
+
     // we make the player play it
     // repeat forever
   }
 }
 
 // attache play functionality to the play button
-const playButton = document.querySelector("#play");
-
-playButton.addEventListener("click", () => play(playButton));
+playButton.addEventListener("click", () => play());

@@ -1,7 +1,8 @@
 const LIST_OF_KEYS = ["a", "s", "d", "f", "g"];
 
 const playButton = document.querySelector("#play");
-const gameText = document.getElementById("gameText");
+const gameText = document.getElementById("game-text");
+const scoreCount = document.getElementById("score-count");
 
 //generates a random list of keys of a particular length
 function newRandomKeys(length) {
@@ -35,7 +36,7 @@ function playSoundByKey(key) {
 }
 
 //returns a promise that plays a list of keys once, at a particular speed, and then resolves
-function computerTurn(keysToPlay, speed = 500) {
+function computerTurn(keysToPlay, speed) {
   return new Promise((resolve) => {
     let keyIndex = 0;
     const myInterval = setInterval(() => {
@@ -74,35 +75,43 @@ function playerTurn(keysToPlay) {
   });
 }
 
-function waitSomeTime() {
+function waitASecond() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
-    }, 2000);
+    }, 1000);
   });
 }
 
 //Main game function
 async function play() {
-  // generate a list of keys
-  let freshList = newRandomKeys(3);
+  let listLength = 3;
+  let speed = 500;
   let shouldPlay = true;
-  // we make the computer play it
+  let score = 0;
+  scoreCount.innerText = score;
+
+  //Game loop
   while (shouldPlay) {
+    let freshList = newRandomKeys(Math.floor(listLength));
+
     gameText.innerText = "Repeat the key pattern";
-    await computerTurn(freshList);
+    //at first the computer plays the keys
+    await computerTurn(freshList, speed);
+    //waits for the player to play the keys
     shouldPlay = await playerTurn(freshList);
+    // we increase the score and difficulty if the player wins the round
     if (shouldPlay) {
       gameText.innerText = "Well Done!!!";
+      score += Math.ceil(500 / speed + listLength + 1);
+      scoreCount.innerText = score;
+      listLength += 0.5; // increases the listLength every other turn
+      speed = speed * 0.9;
     } else {
       gameText.innerText = "Game over :( \n Press play to start over";
     }
 
-    await waitSomeTime();
-    freshList = newRandomKeys(3);
-
-    // we make the player play it
-    // repeat forever
+    await waitASecond();
   }
 }
 

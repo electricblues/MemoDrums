@@ -28,9 +28,9 @@ body {
   border-radius: 15px;
 }
 
-#gameText {
+#game-text {
   height: 3rem;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .key {
@@ -42,11 +42,11 @@ body {
 
   display: flex;
   flex-direction: column-reverse;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .active {
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   opacity: 1;
 }
 
@@ -55,6 +55,7 @@ body {
   justify-content: center;
   gap: 2rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .keyboard-key {
@@ -67,4 +68,8 @@ body {
   background-color: beige;
   text-transform: uppercase;
   font-weight: 600;
+}
+
+.score {
+  font-size: 25px;
 }

@@ -1,40 +1,56 @@
 body {
-  background-color: rgb(68, 68, 68);
-  color: white;
+  background-color: rgb(16, 16, 16);
+  color: beige;
+
+  font-family: "Lilita One", sans-serif;
 }
 
 .main-container {
   width: 100%;
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
   width: 100%;
+  padding-top: 10rem;
+  margin-bottom: 4rem;
+  font-size: 30px;
+  /* font-family: "Merriweather", serif; */
 }
 
 .play-button {
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
+  background-color: rgb(83, 229, 180);
+  font-size: 30px;
+  border-radius: 15px;
 }
 
 .key {
   height: 5rem;
   width: 5rem;
-  background-color: rgba(255, 106, 0, 0.7);
+  background-color: rgb(210, 105, 30);
   border-radius: 5px;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column-reverse;
+  opacity: 0.7;
 }
 
 .active {
-  background-color: red;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 1;
 }
 
 .keys {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .keyboard-key {
@@ -43,4 +59,8 @@ body {
 
 .sound-name {
   color: black;
+  width: 100%;
+  background-color: beige;
+  text-transform: uppercase;
+  font-weight: 600;
 }
